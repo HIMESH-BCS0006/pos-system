@@ -5,6 +5,8 @@ import com.SpringbootAcademy.pos2.Entity.enums.MeasuringUnitType;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Set;
+
 @Entity
 @Table(name = "item")
 @NoArgsConstructor
@@ -39,5 +41,11 @@ public class Item {
     @Column(name = "active_state" , columnDefinition = "TINYINT default 0")
     private boolean active;
 
+    @OneToMany(mappedBy="items")
+    private Set<OrderDetails> orderDetails;
 
+
+    public void setId(int itemId) {
+        this.itemId = itemId;
+    }
 }

@@ -2,20 +2,23 @@ package com.SpringbootAcademy.pos2.Entity;
 
 
 import io.hypersistence.utils.hibernate.type.json.JsonType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Type;
 
 
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "customer")
-
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 public class Customer {
 
     @Id
@@ -45,9 +48,12 @@ public class Customer {
     @Column(name = "active_state" , columnDefinition = "TINYINT default 0")
     private boolean active;
 
+    @OneToMany(mappedBy="customer")
+    private Set<Order> orders;
 
-    public Customer() {
-    }
+
+
+
 
     public Customer(int id, String customerName, String customerAddress, double customerSalary, ArrayList contactNumber, String nic, boolean active) {
         this.id = id;
